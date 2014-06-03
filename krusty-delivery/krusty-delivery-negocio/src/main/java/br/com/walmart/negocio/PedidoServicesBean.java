@@ -3,15 +3,20 @@
  */
 package br.com.walmart.negocio;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import br.com.walmart.dao.PedidoDAO;
 import br.com.walmart.entity.Pedido;
+import br.com.walmart.entity.StatusPedido;
 import br.com.walmart.inegocio.IPedidoServices;
+import br.com.walmart.vo.Pedidos;
 
 /**
  * 
@@ -40,15 +45,17 @@ public class PedidoServicesBean implements IPedidoServices {
 		dao.insert(pedido);
 	}
 
-//	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-//	public Pedidos pendentes() {
-//		final TypedQuery<Pedido> namedQuery = entityManager.createNamedQuery(
-//				"Pedido.buscarNovosEemAtendimento", Pedido.class);
-//		namedQuery.setParameter("novo", StatusPedido.N);
-//		namedQuery.setParameter("atendimento", StatusPedido.A);
-//		final List<Pedido> pedidos = namedQuery.getResultList();
-//		return new Pedidos(pedidos);
-//	}
+	/**
+	 * 
+	 * @return
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Pedidos pedidosEmAberto() {
+		PedidoDAO dao = new PedidoDAO(em);
+
+		final List<Pedido> pedidos = dao.select("SELECT p FROM PEDIDO p", 0, null, false);
+		return new Pedidos(pedidos);
+	}
 //
 //	public void atender(final Long id, final String atendente) {
 //		final Pedido pedido = entityManager.find(Pedido.class, id);

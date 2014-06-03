@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 
 import br.com.walmart.entity.Pedido;
 import br.com.walmart.inegocio.IPedidoServices;
+import br.com.walmart.vo.Pedidos;
 
 /**
  *
@@ -23,5 +24,13 @@ public class PedidoServicesFacade {
 	
 	public void insert( Pedido pedido ){
 		pedidoServices.inserirPedido(pedido);
+	}
+	
+	/**
+	 * Pedidos em Aberto
+	 * @return List<Pedido> pedidos
+	 */
+	public Pedidos getListPedidosEmAberto(){
+		return pedidoServices.pedidosEmAberto();
 	}
 }

@@ -4,6 +4,7 @@
 package br.com.walmart.inegocio;
 
 import br.com.walmart.entity.Pedido;
+import br.com.walmart.vo.Pedidos;
 
 /**
  *
@@ -20,4 +21,11 @@ public interface IPedidoServices {
 	 * @param pedido
 	 */
 	public void inserirPedido(final Pedido pedido);
+	
+	/**
+	 * Pedidos com Estatus em Aberto
+	 * 
+	 * @return List<PEDIDO> pedidos
+	 */
+	public Pedidos pedidosEmAberto();
 }
