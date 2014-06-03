@@ -1,12 +1,15 @@
 package br.com.walmart.service;
+import java.io.IOException;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.ejb.EJB;
+import javax.ejb.Singleton;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
 
 import org.apache.log4j.Logger;
 
@@ -22,8 +25,8 @@ import org.apache.log4j.Logger;
 // indica um session bean com inversao de controle e dependencia
 // passando a responsabilidade de gerir e ser uma unica instancia
 // indica que se comporta como um servidor websocket
-//@Singleton
-//@ServerEndpoint("/notificacao") // notificacao indica qual endereco http atende
+@Singleton
+@ServerEndpoint("/notificacao") // notificacao indica qual endereco http atende
 public class AtualizacaoWebSockectServices {
 	
 	private Queue<Session> queue = new ConcurrentLinkedQueue<Session>();
@@ -38,21 +41,21 @@ public class AtualizacaoWebSockectServices {
 	}
 
 	public void notificar() {
-//		try {
-//			
-//			if( logger.isDebugEnabled() ){
-//				logger.debug("notificar sobre pedidos em aberto");
-//			}
-//			
-//			for (final Session s : queue) {
-//				if (s.isOpen()) {
-//					//s.getBasicRemote().sendText(
-//					//		pedidoService.pendentes().asJson());
-//				}
-//			}
-//		} catch (final IOException e) {
-//			logger.error("Ocorreu um erro ao enviar a mensagem:", e);
-//		}
+		try {
+			
+			if( logger.isDebugEnabled() ){
+				logger.debug("notificar sobre pedidos em aberto");
+			}
+			
+			for (final Session s : queue) {
+				if (s.isOpen()) {
+					s.getBasicRemote().sendText(
+							pedidoService.getListPedidosEmAberto().asJson());
+				}
+			}
+		} catch (final IOException e) {
+			logger.error("Ocorreu um erro ao enviar a mensagem:", e);
+		}
 	}
 
 	@OnOpen
