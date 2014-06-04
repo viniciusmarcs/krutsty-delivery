@@ -42,7 +42,7 @@ function montarTabela(json) {
 function atender(id, status) {
 	console.log('Iniciando o atendimento do pedido ' + id);
 	$.ajax({
-		url : './atendimento',
+		url : './pedido',
 		type : 'POST',
 		accepts : 'application/json',
 		data : 'id=' + id,
@@ -89,7 +89,7 @@ $(document)
 				});
 
 /**
- * Novo atendimento
+ * Novo atendimento criacao de um novoPedido
  * 
  * @param id
  * @param status
@@ -98,7 +98,7 @@ function atender(id, status) {
 	console.log('Iniciando o atendimento do pedido ' + id + ' e status '
 			+ status);
 	$.ajax({
-		url : './atendimento',
+		url : './pedido',
 		type : 'POST',
 		accepts : 'application/json',
 		data : 'id=' + id,
@@ -156,7 +156,7 @@ function atualizarTabela(evt) {
 $(document).ready(function() {
 	(function(){ 
 		window.addEventListener("load", 
-				init( "ws://localhost:8080/pastelaria-online/notificacao", atualizarTabela), false); 
+				init( "ws://localhost:8080/krusty/notificacao", atualizarTabela), false); 
 		})
 	();
 }

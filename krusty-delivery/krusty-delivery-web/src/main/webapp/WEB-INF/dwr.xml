@@ -1,6 +1,8 @@
 <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr//dwr30.dtd">
-
 <dwr>
+    <init>
+        <converter id="toplink" class="jfast.core.dwr.TopLinkConverter"/>
+    </init>
     <allow>
         <!-- Novo conversor aplicado aos tipos data/hora -->
         <convert match="java.util.Date" converter="date"/>
@@ -22,7 +24,7 @@
         
         <!-- objeto para paginacao -->
         <convert converter="toplink" match="jfast.core.paginator.PageInfo" javascript="PageInfo" />
-        <convert converter="toplink" match="jfast.core.paginator.Page" javascript="Pagina"/>
+        <convert converter="toplink" match="jfast.core.paginator.Page" javascript="Pagina"/>        
 
 		<!-- mapeamento da classe de servico, que faz a chamada das interfaces para camada de negocio -->
         <create creator="new" scope="application" javascript="PedidoServices">
@@ -33,5 +35,7 @@
 		<convert converter="bean" match="br.com.walmart.entity.PedidoLinha" javascript="PedidoLinha" />
 		<convert converter="bean" match="br.com.walmart.entity.Produto" javascript="Produto" />
 		<convert converter="bean" match="br.com.walmart.entity.StatusPedido" javascript="StatusPedido" />
+		<convert converter="bean" match="br.com.walmart.vo.Pedidos" javascript="Pedidos" />
+		<convert converter="bean" match="br.com.walmart.vo.Produtos" javascript="Produtos" />
      </allow>
 </dwr>

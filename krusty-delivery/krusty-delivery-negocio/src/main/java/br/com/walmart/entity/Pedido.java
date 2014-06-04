@@ -95,12 +95,14 @@ public class Pedido implements Serializable {
 	}
 
 	public void addLine(PedidoLinha line) {
-		if (this.lines == null) {
-			this.lines = new ArrayList<PedidoLinha>();
-		}
+		if( this.isOpen() ){
+			if (this.lines == null ) {
+				this.lines = new ArrayList<PedidoLinha>();
+			}
 
-		this.lines.add(line);
-		this.totalPedido = this.totalPedido + line.getValor();
+			this.lines.add(line);
+			this.totalPedido = this.totalPedido + line.getValor();			
+		}
 	}
 
 	public void novoPedido() {
@@ -121,6 +123,24 @@ public class Pedido implements Serializable {
 
 	public void canceladoPedido() {
 		this.status = StatusPedido.C.toString();
+	}
+	
+	public boolean isOpen(){
+		boolean result = !this.status.equals( StatusPedido.C.toString() ) && !this.status.equals( StatusPedido.E.toString() ) && !this.status.equals( StatusPedido.F.toString() );
+		if( !result ){
+			System.out.println("O estatus " + this.status +  " não permite inserção de novas linhas.");
+		}
+		
+		return result;
+	}
+	
+	public double getTotal(){
+		double total = 0.0;
+		for( PedidoLinha l : this.lines ){
+			total = total + l.getValor();
+		}
+		
+		return total;
 	}
 
 	public String toString() {

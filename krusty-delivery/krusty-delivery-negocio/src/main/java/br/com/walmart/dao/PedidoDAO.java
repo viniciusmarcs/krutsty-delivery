@@ -4,9 +4,9 @@
 package br.com.walmart.dao;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 
 import jfast.core.persistence.JPAAbstractDAO;
+import jfast.core.persistence.PersistenceException;
 
 /**
  * Classe responsavel pela Persistencia de Objetos
@@ -35,7 +35,7 @@ public class PedidoDAO extends JPAAbstractDAO {
 	public Object insert(Object obj) throws PersistenceException {
 		try {
 
-			obj = insert(obj);
+			obj = super.insert(obj);
 		} catch (Exception e) {
 			throw new PersistenceException("Impossível inserir Objeto "
 					+ e.getMessage());
@@ -52,7 +52,7 @@ public class PedidoDAO extends JPAAbstractDAO {
 	 */
 	public Object update(Object obj) throws PersistenceException {
 		try {
-			obj = update(obj);
+			obj = super.update(obj);
 		} catch (Exception e) {
 			throw new PersistenceException("Impossível atualizar objeto",
 					e.getCause());
@@ -69,7 +69,7 @@ public class PedidoDAO extends JPAAbstractDAO {
 	 */
 	public void delete(Object obj) throws PersistenceException {
 		try {
-			delete(obj);
+			super.delete(obj);
 		} catch (Exception e) {
 			throw new PersistenceException("Impossível excluir objeto.",
 					e.getCause());

@@ -10,13 +10,13 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
+import jfast.core.persistence.PersistenceException;
 import br.com.walmart.dao.PedidoDAO;
 import br.com.walmart.entity.Pedido;
-import br.com.walmart.entity.StatusPedido;
 import br.com.walmart.inegocio.IPedidoServices;
 import br.com.walmart.vo.Pedidos;
+import br.com.walmart.vo.Produtos;
 
 /**
  * 
@@ -40,30 +40,45 @@ public class PedidoServicesBean implements IPedidoServices {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void inserirPedido(final Pedido pedido) {
-		PedidoDAO dao = new PedidoDAO( em );
-		dao.insert(pedido);
+	public void inserirPedido(Pedido pedido) {
+		try {
+			PedidoDAO dao = new PedidoDAO(em);
+
+			dao.insert(pedido);
+		} catch (PersistenceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
+	 * encapsula um List<Pedido> em um objeto Pedidos
 	 * 
-	 * @return
+	 * @return ( Pedidos ) List<Pedido> pedidos
+	 * @throws PersistenceException 
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public Pedidos pedidosEmAberto() {
+	public Pedidos getPedidosEmAberto() throws PersistenceException {
 		PedidoDAO dao = new PedidoDAO(em);
 
-		final List<Pedido> pedidos = dao.select("SELECT p FROM PEDIDO p", 0, null, false);
+		final List<Pedido> pedidos = dao.select("SELECT p FROM PEDIDO p", 0,
+				null, false);
 		return new Pedidos(pedidos);
 	}
-//
-//	public void atender(final Long id, final String atendente) {
-//		final Pedido pedido = entityManager.find(Pedido.class, id);
-//		Preconditions.checkState(pedido.getStatus().equals(StatusPedido.N.name() ),
-//				"Pedido ja em atendimento");
-//		p.setStatus(StatusPedido.A.name());
-//		p.setDataAtendimento(new Date());
-//		p.setAtendente(atendente);
-//	}
+
+	/**
+	 * encapsula um List<Pedido> em um objeto Pedidos
+	 * 
+	 * @return ( Produtos ) List<Produtos> produtos
+	 * @throws PersistenceException 
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Produtos getProdutos() throws PersistenceException {
+		PedidoDAO dao = new PedidoDAO(em);
+		final List<Produtos> produtos = dao.select("SELECT p FROM PRODUTO p",
+				0, null, false);
+
+		return new Produtos(produtos);
+	}
 
 }
