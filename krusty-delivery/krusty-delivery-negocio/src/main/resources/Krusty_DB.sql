@@ -26,6 +26,11 @@ mvn archetype:generate -DgroupId=br.com.walmart -DartifactId=krusty-delivery -Da
 		<resource-ref ref="jdbc/krustyds" enabled="true" />
 	</server>
 </servers>
+
+--- configuracao para correcao de erro no application server
+<jvm-options>-Dorg.omg.CORBA.ORBSingletonClass=com.sun.corba.se.impl.orb.ORBSingleton</jvm-options>
+---
+
 ********************************************************************************************
 
 ***************** Oracle Data Base *********************************************************
