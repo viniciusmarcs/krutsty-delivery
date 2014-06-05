@@ -75,5 +75,11 @@ public class PedidoDAO extends JPAAbstractDAO {
 					e.getCause());
 		}
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "PedidoDAO - entityManager.: [ " + this.em + "]";
+	}
 
 }
