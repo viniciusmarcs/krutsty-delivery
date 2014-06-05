@@ -47,6 +47,7 @@ public class PedidoLinha implements Serializable {
 	@Column(name="QUANTIDADE", nullable=false)
 	private int quantidade;
 	
+	@Column(name="DESCRICAOPRODUTO", nullable=false, length=60)
 	private String descricaoProduto;
 	
 	public PedidoLinha(){

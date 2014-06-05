@@ -52,9 +52,12 @@ public class AtualizacaoWebSockectServices {
 
 			for (final Session s : queue) {
 				if (s.isOpen()) {
+					logger.debug("Session is Open.: " + s);
 					String pedidos = pedidoService.getListPedidosEmAberto()
 							.asJson();
 					s.getBasicRemote().sendText(pedidos);
+				} else {
+					logger.debug("Session is Closed.: " + s);
 				}
 			}
 		} catch (final IOException e) {

@@ -187,6 +187,11 @@ public class JPAAbstractDAO {
 			Query query = createQuery(jpaQuery, 0, maxResults, named);
 			fillParameters(query, parameters);
 			objects = query.getResultList();
+			if( objects != null && objects.size() > 0 ){
+				if( logger.isDebugEnabled() ){
+					logger.debug("Results: " + objects );
+				}
+			}
 		} catch (Exception e) {
 			logger.error("Unable to execute query: " + jpaQuery, e);
 			throw new PersistenceException("Impossível consultar dados", e);

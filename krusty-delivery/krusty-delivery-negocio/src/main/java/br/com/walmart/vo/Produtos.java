@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.walmart.entity.Pedido;
-import br.com.walmart.entity.ProdutosEnum;
+import br.com.walmart.entity.Produto;
 
 import com.google.gson.Gson;
 
@@ -25,7 +24,7 @@ public class Produtos implements Serializable{
 	/**
 	 * lista para encapsulamento
 	 */
-	private List<Produtos> produtos;
+	private List<Produto> produtos;
 	
 	/**
 	 * auxiliar na paginacao
@@ -36,7 +35,7 @@ public class Produtos implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produtos(final List<Produtos> produtos) {
+	public Produtos(final List<Produto> produtos) {
 		this.produtos = produtos;
 		if( produtos != null && !produtos.isEmpty() ){
 			this.totalCount = produtos.size();
@@ -45,7 +44,7 @@ public class Produtos implements Serializable{
 		}
 	}
 
-	public List<Produtos> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 	

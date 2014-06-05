@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +32,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "pedido")
+@NamedQueries(value={@NamedQuery(name="Pedido.buscarNovosPedidosAberto", query= "SELECT p FROM Pedido p INNER JOIN FETCH p.lines WHERE ( p.status = :novo OR p.status = :atendimento ) ORDER By p.pedidoid desc, p.status desc")})
 public class Pedido implements Serializable {
 
 	@Id
