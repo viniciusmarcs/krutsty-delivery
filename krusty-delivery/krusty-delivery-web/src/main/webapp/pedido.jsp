@@ -8,10 +8,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	
 <link rel="stylesheet" type="text/css" href="<c:url value="estaticos/css/style.css" />" media="all">
-<script type='text/javascript' src='<c:url value="/dwr/engine.js" />' ></script>
-<script type='text/javascript' src='<c:url value="/dwr/util.js" />' ></script>
-<script type='text/javascript' src='<c:url value="/dwr/interface/PedidoServices.js" />'></script>
-
+	
 <script type='text/javascript' src='<c:url value="/estaticos/js/resources/jquery/jquery-2.0.3.min.js" />' ></script>
 <script type='text/javascript' src='<c:url value="/estaticos/pedido/pedido.js" />' ></script>
 

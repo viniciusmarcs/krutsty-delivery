@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
-
 import jfast.com.service.websocket.AtualizacaoWebSockectServices;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
 import br.com.walmart.entity.Pedido;
 import br.com.walmart.inegocio.IPedidoServices;
 import br.com.walmart.vo.Resultado;
@@ -25,27 +27,43 @@ public class EfetuarPedidoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3309626245848149687L;
 
+	private static Logger logger;
+	
 	@EJB
 	private IPedidoServices pedidoService;
 
 	@EJB
 	private AtualizacaoWebSockectServices atualizacaoWebSocket;
+	
+	static {
+		logger = Logger.getLogger(EfetuarPedidoServlet.class);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug("Efetuar Pedido");
+		}
+		
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
 		if (session != null && StringUtils.isEmpty(session.getId())) {
+			logger.info("HttpSession is OK.: " );
 			final Gson gson = new Gson();
 			try {
 				final InputStreamReader inputStreamReader = new InputStreamReader(
 						req.getInputStream());
 
+				logger.info("InputStreamReader.: " + inputStreamReader);
 				final Pedido pedido = gson.fromJson(inputStreamReader,
 						Pedido.class);
+				if (logger.isDebugEnabled()) {
+					logger.debug("Get Pedido from Json -: " + pedido);
+				}
 				
 				if( pedido != null ){
 					pedidoService.inserirPedido(pedido);	
