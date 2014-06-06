@@ -4,6 +4,8 @@
 	version="2.5">
 	<description>Krust web</description>
 	<display-name>krusty-delivery</display-name>
+	
+	<!-- DWR configuration -->
 	<servlet>
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
