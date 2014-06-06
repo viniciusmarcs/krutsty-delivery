@@ -10,12 +10,15 @@ import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author marcosvinicius
  *
  */
 @Embeddable
+@NamedQueries(value={@NamedQuery(name="Produto.buscarProdutos", query= "SELECT p FROM Produto p ")})
 public class Produto implements Serializable {
 	
 //	@Id

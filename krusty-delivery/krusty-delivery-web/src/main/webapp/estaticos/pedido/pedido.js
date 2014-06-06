@@ -49,13 +49,17 @@ function getPedido(){
 		"dataPedido" 	: $("#dataPedido").val(),
 		"mesa" 			: $("#mesa").val(),
 		"cliente" 		: $("#cliente").val(),
-		"lines" 		: [ {
-			"descricaoProduto" 	: $("#descricaoProduto").val(),
-			"quantidade" 		: parseInt($("#quantidade").val()),
-			"valor" 			: $("#valor").val(),
-			"numeroLinha" 		: parseInt($("#numeroLinha").val())
-		} ]
+		"lines" 		: [{	"pedidoLinhaID":123,
+			"produto":{"produtoID":123,"codigo":1,"nome":"Pizza","preco":10.0},
+			"numeroLinha":1,
+			"valor":10.0,
+			"quantidade":1,
+			"descricaoProduto": "Pizza"}]
 	};
 	
 	return pedido;
+}
+
+function getProdutos(){
+	
 }

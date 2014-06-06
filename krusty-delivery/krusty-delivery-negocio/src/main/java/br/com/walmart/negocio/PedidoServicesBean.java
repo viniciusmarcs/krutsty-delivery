@@ -75,11 +75,12 @@ public class PedidoServicesBean implements IPedidoServices {
 	 * @return ( Pedidos ) List<Pedido> pedidos
 	 * @throws PersistenceException 
 	 */
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Pedidos getPedidosEmAberto() throws PersistenceException {
 		PedidoDAO dao = new PedidoDAO(em);
 		logger.info("PedidoDAO - getPedidosEmAberto.: " + dao);
-		HashMap params = new HashMap();
+		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("novo", "Novo");
 		params.put("atendimento", "Em atendimento");
 		final List<Pedido> pedidos = dao.select("Pedido.buscarNovosPedidosAberto", 0,
@@ -96,12 +97,14 @@ public class PedidoServicesBean implements IPedidoServices {
 	 * @return ( Produtos ) List<Produtos> produtos
 	 * @throws PersistenceException 
 	 */
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Produtos getProdutos() throws PersistenceException {
 		PedidoDAO dao = new PedidoDAO(em);
 		logger.info("PedidoDAO - getProdutos.: " + dao);
-		final List<Produto> produtos = dao.select("SELECT p FROM Produto p",
-				0, null, false);
+
+		final List<Produto> produtos = dao.select("Produto.buscarProdutos",
+				0, null, true);
 
 		return new Produtos(produtos);
 	}
